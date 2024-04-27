@@ -1,5 +1,7 @@
 up:
-	docker compose -f srcs/docker-compose.yml up
+	mkdir -p /home/jocaetan/Course/Inception/data/mysql
+	mkdir -p /home/jocaetan/Course/Inception/data/html
+	docker compose -f srcs/docker-compose.yml up -d
 
 down:
 	docker compose -f srcs/docker-compose.yml down
@@ -14,7 +16,7 @@ test-mariadb:
 	docker run --rm --env-file srcs/.env test-mariadb
 	docker rmi test-mariadb
 
-clear: clear-containers clear-images clear-volumes
+clear: clear-images clear-volumes
 
 clear-volumes:
 	docker volume rm srcs_db srcs_wp
@@ -24,3 +26,6 @@ clear-containers:
 
 clear-images:
 	docker rmi nginx-server mariadb-repo wordpress-site
+
+clear-cache:
+	docker buildx prune
