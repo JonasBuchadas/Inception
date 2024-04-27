@@ -1,0 +1,69 @@
+version: "3.9"
+
+services:
+  mariadb-repo:
+    build: ./requirements/mariadb
+    image: mariadb-repo
+    container_name: mariadb-repo
+    volumes:
+      - db:/var/lib/mysql
+    restart: on-failure
+    env_file:
+      - .env
+    networks:
+      - inception-network
+    expose:
+      - 3306
+
+  wordpress-site:
+    build: ./requirements/wordpress
+    image: wordpress-site
+    container_name: wordpress-site
+    depends_on:
+      - mariadb-repo
+    env_file:
+      - .env
+    volumes:
+      - wp:/var/www/html
+    restart: on-failure
+    networks:
+      - inception-network
+    expose:
+      - 9000
+
+  nginx-server:
+    build: ./requirements/nginx
+    image: nginx-server
+    container_name: nginx-server
+    ports:
+      - "443:443"
+    depends_on:
+      - wordpress-site
+    restart: on-failure
+    env_file:
+      - .env
+    networks:
+      - inception-network
+    volumes:
+      - wp:/var/www/html
+    expose:
+      - "443:443"
+
+networks:
+  inception-network:
+    name: inception-network
+
+volumes:
+  db:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/jonasb/42/Inception/data/mysql
+      o: bind
+
+  wp:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/jonasb/42/Inception/data/html
+      o: bind

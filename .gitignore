@@ -1,1 +1,4 @@
 */.env
+*/secrets
+**/data/
+**/cacert.pem
