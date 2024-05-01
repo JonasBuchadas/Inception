@@ -1,7 +1,12 @@
 up:
-	mkdir -p /home/jocaetan/Course/Inception/data/mysql
-	mkdir -p /home/jocaetan/Course/Inception/data/html
+	mkdir -p /home/jonasb/42/Inception/data/mysql
+	mkdir -p /home/jonasb/42/Inception/data/html
 	docker compose -f srcs/docker-compose.yml up -d
+
+up-recreate:
+	mkdir -p /home/jonasb/42/Inception/data/mysql
+	mkdir -p /home/jonasb/42/Inception/data/html
+	docker compose -f srcs/docker-compose.yml up --force-recreate -d
 
 down:
 	docker compose -f srcs/docker-compose.yml down
