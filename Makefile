@@ -1,11 +1,11 @@
 up:
-	mkdir -p /home/jonasb/42/Inception/data/mysql
-	mkdir -p /home/jonasb/42/Inception/data/html
+	mkdir -p /home/jonas/42/Inception/data/mysql
+	mkdir -p /home/jonas/42/Inception/data/html
 	docker compose -f srcs/docker-compose.yml up -d
 
 up-recreate:
-	mkdir -p /home/jonasb/42/Inception/data/mysql
-	mkdir -p /home/jonasb/42/Inception/data/html
+	mkdir -p /home/jonas/42/Inception/data/mysql
+	mkdir -p /home/jonas/42/Inception/data/html
 	docker compose -f srcs/docker-compose.yml up --force-recreate -d
 
 down:
@@ -20,6 +20,9 @@ test-mariadb:
 	docker build -t test-mariadb srcs/requirements/mariadb
 	docker run --rm --env-file srcs/.env test-mariadb
 	docker rmi test-mariadb
+
+ps:
+	docker compose -f srcs/docker-compose.yml ps
 
 clear: clear-images clear-volumes
 

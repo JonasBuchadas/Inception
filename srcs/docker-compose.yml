@@ -58,12 +58,12 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/jonasb/42/Inception/data/mysql
+      device: /home/jonas/42/Inception/data/mysql
       o: bind
 
   wp:
     driver: local
     driver_opts:
       type: none
-      device: /home/jonasb/42/Inception/data/html
+      device: /home/jonas/42/Inception/data/html
       o: bind
