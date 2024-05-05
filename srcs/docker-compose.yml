@@ -29,6 +29,10 @@ services:
       - mariadb-repo
     env_file:
       - .env
+    environment:
+      - WORDPRESS_ADMIN_PASS=/run/secrets/wordpress_admin_pass
+    secrets:
+      - wordpress_admin_pass
     volumes:
       - wp:/var/www/html
     restart: on-failure
@@ -64,6 +68,8 @@ secrets:
     file: ../secrets/db_password.txt
   mariadb_root_pass:
     file: ../secrets/db_root_password.txt
+  wordpress_admin_pass:
+    file: ../secrets/credentials.txt
 
 volumes:
   db:
