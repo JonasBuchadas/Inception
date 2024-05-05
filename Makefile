@@ -1,3 +1,6 @@
+include srcs/.env
+export
+
 up:
 	mkdir -p /home/jonas/42/Inception/data/mysql
 	mkdir -p /home/jonas/42/Inception/data/html
@@ -20,6 +23,12 @@ test-mariadb:
 	docker build -t test-mariadb srcs/requirements/mariadb
 	docker run --rm --env-file srcs/.env test-mariadb
 	docker rmi test-mariadb
+
+enter-mariadb:
+	docker exec -it mariadb-repo bash
+
+enter-mariadb-outside-container:
+	@mysql -h $(shell docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(MARIADB_HOST)) -u $(MARIADB_USER) -p$(MARIADB_USER_PASS) $(MARIADB_NAME)
 
 ps:
 	docker compose -f srcs/docker-compose.yml ps

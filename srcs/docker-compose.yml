@@ -1,4 +1,4 @@
-version: "3.9"
+# version: "3.9"
 
 services:
   mariadb-repo:
@@ -10,6 +10,12 @@ services:
     restart: on-failure
     env_file:
       - .env
+    environment:
+      - MARIADB_USER_PASS=/run/secrets/mariadb_user_pass
+      - MARIADB_ROOT_PASS=/run/secrets/mariadb_root_pass
+    secrets:
+      - mariadb_user_pass
+      - mariadb_root_pass
     networks:
       - inception-network
     expose:
@@ -52,6 +58,12 @@ services:
 networks:
   inception-network:
     name: inception-network
+
+secrets:
+  mariadb_user_pass:
+    file: ../secrets/db_password.txt
+  mariadb_root_pass:
+    file: ../secrets/db_root_password.txt
 
 volumes:
   db:
