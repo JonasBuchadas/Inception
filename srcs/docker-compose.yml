@@ -30,9 +30,9 @@ services:
     env_file:
       - .env
     environment:
-      - WORDPRESS_ADMIN_PASS=/run/secrets/wordpress_admin_pass
+      - CREDENTIALS=/run/secrets/credentials
     secrets:
-      - wordpress_admin_pass
+      - credentials
     volumes:
       - wp:/var/www/html
     restart: on-failure
@@ -68,7 +68,7 @@ secrets:
     file: ../secrets/db_password.txt
   mariadb_root_pass:
     file: ../secrets/db_root_password.txt
-  wordpress_admin_pass:
+  credentials:
     file: ../secrets/credentials.txt
 
 volumes:
@@ -76,12 +76,12 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/jonas/42/Inception/data/mysql
+      device: /home/jocaetan/data/mysql
       o: bind
 
   wp:
     driver: local
     driver_opts:
       type: none
-      device: /home/jonas/42/Inception/data/html
+      device: /home/jocaetan/data/html
       o: bind

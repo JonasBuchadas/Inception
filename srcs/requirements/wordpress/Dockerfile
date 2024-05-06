@@ -6,6 +6,7 @@ RUN apt-get update -y && \
     wget \
     curl \
     unzip \
+    jq \
     php7.4 php7.4-fpm php7.4-mysql php7.4-curl php7.4-gd php7.4-xml php7.4-mbstring
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \

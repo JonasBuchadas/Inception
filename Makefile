@@ -2,13 +2,13 @@ include srcs/.env
 export
 
 up:
-	mkdir -p /home/jonas/42/Inception/data/mysql
-	mkdir -p /home/jonas/42/Inception/data/html
+	mkdir -p /home/jocaetan/data/mysql
+	mkdir -p /home/jocaetan/data/html
 	docker compose -f srcs/docker-compose.yml up -d
 
 up-recreate:
-	mkdir -p /home/jonas/42/Inception/data/mysql
-	mkdir -p /home/jonas/42/Inception/data/html
+	mkdir -p /home/jocaetan/data/mysql
+	mkdir -p /home/jocaetan/data/html
 	docker compose -f srcs/docker-compose.yml up --force-recreate -d
 
 down:
